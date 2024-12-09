@@ -44,7 +44,7 @@
                         type="file" 
                         id="file" 
                         class="form-control" 
-                        accept=".csv" 
+                        accept=".csv, .xlsx" 
                         required>
                     <label for="Email" class="Email-Id">Enter The Email Id</label>
                     <input 
@@ -58,6 +58,19 @@
                         id="Password-Email" 
                         class="Password-Email"  
                         required>
+                    <!-- <label for="Subject" class="Subject">Enter Subject</label>
+                    <input 
+                        type="text" 
+                        id="Subject" 
+                        class="Subject"  
+                        required> -->
+                    <label for="Subject" class="Subject">Subject</label>
+                    <textarea 
+                        id="Subject" 
+                        class="Subject" 
+                        placeholder="Enter the email subject with new lines if needed"
+                        style="min-height: 50px;" 
+                        required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Upload File</button>
             </form>

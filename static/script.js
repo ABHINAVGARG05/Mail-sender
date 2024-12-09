@@ -45,6 +45,7 @@ uploadForm.addEventListener('submit', async (e) => {
     const file = document.getElementById('file').files[0];
     const email = document.getElementById('Email').value; // Get Email field value
     const passwordEmail = document.getElementById('Password-Email').value; // Get Password-Email field value
+    const message = document.getElementById('Subject').value;
 
     if (!file) {
         showAlert('Please select a file to upload', 'danger');
@@ -55,6 +56,7 @@ uploadForm.addEventListener('submit', async (e) => {
     formData.append('file', file);
     formData.append('Email', email);
     formData.append('Password-Email', passwordEmail);
+    formData.append('Subject',message);
 
     try {
         const token = localStorage.getItem('authToken');

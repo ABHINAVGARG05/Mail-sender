@@ -57,10 +57,11 @@ def upload():
     file = request.files.get('file')
     email_id = request.form.get('Email')
     password = request.form.get('Password-Email')
+    subject = request.form.get('Subject')
     app.config['MAIL_USERNAME']= email_id
     app.config['MAIL_PASSWORD'] = password
     email = Mail(app)
-    return send_bulk_emails(email, file)
+    return send_bulk_emails(email, file,subject)
 
 @app.route('/get-mails',methods = ['GET'])
 @jwt_required()
