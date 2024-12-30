@@ -43,36 +43,53 @@
                     <input 
                         type="file" 
                         id="file" 
-                        class="form-control" 
+                        class="form-control"
+                        style="margin: 10px;"  
                         accept=".csv, .xlsx" 
                         required>
                     <label for="Email" class="Email-Id">Enter The Email Id</label>
                     <input 
                         type="text" 
                         id="Email" 
-                        class="Email-Id"  
+                        class="Email-Id"
+                        style="margin: 10px;" 
                         required>
                     <label for="Password-Email" class="Password-Email">Enter Password</label>
                     <input 
                         type="password" 
                         id="Password-Email" 
-                        class="Password-Email"  
+                        class="Password-Email"
+                        style="margin: 10px;"   
                         required>
-                    <!-- <label for="Subject" class="Subject">Enter Subject</label>
-                    <input 
-                        type="text" 
-                        id="Subject" 
-                        class="Subject"  
-                        required> -->
-                    <label for="Subject" class="Subject">Subject</label>
+                    <br>
+                    <label for="HTML" class="HTML">HTML Template</label>
                     <textarea 
-                        id="Subject" 
-                        class="Subject" 
-                        placeholder="Enter the email subject with new lines if needed"
-                        style="min-height: 50px;" 
+                        id="HTML" 
+                        class="HTML" 
+                        placeholder="Enter your HTML template here"
+                        style="
+                        min-height: 100px; 
+                        width: 100%; 
+                        font-family: 'Courier New', Courier, monospace; 
+                        font-size: 14px; 
+                        line-height: 1.5; 
+                        padding: 10px; 
+                        border: 2px solid #ccc; 
+                        border-radius: 5px; 
+                        background-color: #f9f9f9; 
+                        color: #333; 
+                        margin-top:10px;
+                        resize: vertical;"  
                         required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Upload File</button>
+
+                <!-- Preview Section -->
+                <div id="preview-container" class="mt-4" style="display: none;">
+                    <h5>Template Preview:</h5>
+                    <div id="previewContent" class="border p-3" style="background-color: #f9f9f9; border-radius: 5px;"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-3">Upload File</button>
             </form>
         </div>
 

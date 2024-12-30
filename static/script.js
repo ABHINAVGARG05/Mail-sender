@@ -1,16 +1,16 @@
-// Select DOM elements
 const loginForm = document.getElementById('loginForm');
 const uploadForm = document.getElementById('uploadForm');
 const alertBox = document.getElementById('alert');
 const loginDiv = document.getElementById('login-form');
 const uploadDiv = document.getElementById('upload-form');
+const htmlTemplateInput = document.getElementById('HTML'); // For HTML template input
+const previewContainer = document.getElementById('preview-container'); // For preview container
+const previewContent = document.getElementById('previewContent'); // For live preview
 
-// Helper function to show alerts
 function showAlert(message, type = 'success') {
     alertBox.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
 }
 
-// Login Form Submission
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -38,14 +38,13 @@ loginForm.addEventListener('submit', async (e) => {
     }
 });
 
-// File Upload Form Submission
 uploadForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const file = document.getElementById('file').files[0];
-    const email = document.getElementById('Email').value; // Get Email field value
-    const passwordEmail = document.getElementById('Password-Email').value; // Get Password-Email field value
-    const message = document.getElementById('Subject').value;
+    const email = document.getElementById('Email').value;
+    const passwordEmail = document.getElementById('Password-Email').value;
+    const message = document.getElementById('HTML').value;
 
     if (!file) {
         showAlert('Please select a file to upload', 'danger');
@@ -56,7 +55,7 @@ uploadForm.addEventListener('submit', async (e) => {
     formData.append('file', file);
     formData.append('Email', email);
     formData.append('Password-Email', passwordEmail);
-    formData.append('Subject',message);
+    formData.append('Subject', message);
 
     try {
         const token = localStorage.getItem('authToken');
@@ -77,4 +76,14 @@ uploadForm.addEventListener('submit', async (e) => {
     } catch (error) {
         showAlert(`Error: ${error.message}`, 'danger');
     }
+});
+
+htmlTemplateInput.addEventListener('input', () => {
+    const template = htmlTemplateInput.value;
+
+    const highlightedTemplate = template.replace(/{{\s*([^}]+)\s*}}/g, `<span style="background-color: yellow;">{{$1}}</span>`);
+
+    previewContent.innerHTML = highlightedTemplate;
+
+    previewContainer.style.display = template.trim() ? 'block' : 'none';
 });
