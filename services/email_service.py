@@ -40,6 +40,7 @@ def send_bulk_emails(mail, file,template_html):
                 recipients=[row['email_id']],
                 sender=os.getenv('MAIL_SENDER')
             )
+            print(msg)
             msg.html = updated_template
             mail.send(msg)
 
@@ -49,7 +50,11 @@ def send_bulk_emails(mail, file,template_html):
                 message=updated_template,
                 sender=current_user["username"]
             )
-            email_record.save()
+            print(email_record)
+            try:
+                email_record.save()
+            except Exception as e:
+                return jsonify({"message":"Error in stroign in db"}), 500
 
         return jsonify({"message": "Emails sent successfully!"}), 200
 
