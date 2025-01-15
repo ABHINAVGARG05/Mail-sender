@@ -27,6 +27,13 @@ jwt = JWTManager(app)
 
 initialize_db()
 
+# test_record = EmailRecords(
+#             recipient="test1@example.com",
+#             subject="Test Subject",
+#             message="Test Message",
+#             sender="test_sender"
+# )
+# test_record.save()
 
 @app.route('/register',methods=['POST'])
 def register():

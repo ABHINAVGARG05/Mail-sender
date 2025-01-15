@@ -22,6 +22,12 @@ def send_bulk_emails(mail, file,template_html):
         else:
             return {"message": "Unsupported file format. Please upload .csv or .xlsx files"}, 400
 
+
+        body = None
+        recipients=[]
+        sub = None
+
+
         required_columns = {'email_id', 'subject'}
         if not required_columns.issubset(data.columns):
             return jsonify({"error": f"CSV must contain the following columns: {required_columns}"}), 400
@@ -40,21 +46,32 @@ def send_bulk_emails(mail, file,template_html):
                 recipients=[row['email_id']],
                 sender=os.getenv('MAIL_SENDER')
             )
-            print(msg)
             msg.html = updated_template
             mail.send(msg)
+            recipients.append(row['email_id'])
+            if sub is None:
+                    sub = row['subject']
+            if body is None:
+                body = updated_template
 
+        if recipients:
             email_record = EmailRecords(
-                recipient=row['email_id'],
-                subject=row['subject'],
-                message=updated_template,
+                recipient=recipients,
+                subject=sub,
+                message=body,
                 sender=current_user["username"]
             )
-            print(email_record)
-            try:
-                email_record.save()
-            except Exception as e:
-                return jsonify({"message":"Error in stroign in db"}), 500
+            email_record.save()
+
+            
+            # email_record = EmailRecords(
+            #     recipient=row['email_id'],
+            #     subject=row['subject'],  
+            #     message=updated_template,
+            #     sender=current_user["username"]
+            # )
+            # print(email_record.to_json())
+            # email_record.save()
 
         return jsonify({"message": "Emails sent successfully!"}), 200
 
